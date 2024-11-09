@@ -7,16 +7,14 @@ canvasConfeti.style.height = '100%';
 canvasConfeti.style.zIndex = '1';
 canvasConfeti.style.pointerEvents = 'none';
 
-
 const canvasLuces = document.createElement('canvas');
 canvasLuces.style.position = 'fixed';
 canvasLuces.style.top = '0';
 canvasLuces.style.left = '0';
 canvasLuces.style.width = '100%';
 canvasLuces.style.height = '100%';
-canvasLuces.style.zIndex = '1'; 
+canvasLuces.style.zIndex = '1';
 canvasLuces.style.pointerEvents = 'none';
-
 
 function lanzarConfeti() {
     const duration = 77000;
@@ -40,12 +38,10 @@ function lanzarConfeti() {
     })();
 }
 
-
 function reproducirMusica() {
     const audio = new Audio('assets/happy_birthday.mp3');
     audio.play();
 }
-
 
 function crearLucesFestivas() {
     const ctx = canvasLuces.getContext('2d');
@@ -55,7 +51,7 @@ function crearLucesFestivas() {
     const luces = [];
     const numLuces = 50;
 
-    for(let i = 0; i < numLuces; i++) {
+    for (let i = 0; i < numLuces; i++) {
         luces.push({
             x: Math.random() * canvasLuces.width,
             y: Math.random() * canvasLuces.height,
@@ -74,8 +70,8 @@ function crearLucesFestivas() {
             luz.x += luz.dx;
             luz.y += luz.dy;
             
-            if(luz.x < 0 || luz.x > canvasLuces.width) luz.dx *= -1;
-            if(luz.y < 0 || luz.y > canvasLuces.height) luz.dy *= -1;
+            if (luz.x < 0 || luz.x > canvasLuces.width) luz.dx *= -1;
+            if (luz.y < 0 || luz.y > canvasLuces.height) luz.dy *= -1;
             
             ctx.beginPath();
             const gradient = ctx.createRadialGradient(
@@ -99,45 +95,69 @@ document.querySelector('.botonPresioname').addEventListener('click', () => {
     const container = document.querySelector('.botonPresioname').parentElement;
     container.style.display = 'none';
 
-    // Añadir canvas y luces
+    document.body.style.backgroundColor = '#040104';
+
     document.body.appendChild(canvasConfeti);
     document.body.appendChild(canvasLuces);
     crearLucesFestivas();
     lanzarConfeti();
     reproducirMusica();
 
-    // Añadir mensaje de texto
+    const gif = document.createElement('img');
+    gif.src = 'assets/alalo4.gif';
+    gif.style.position = 'fixed';
+    gif.style.top = '10%';
+    gif.style.left = '50%';
+    gif.style.transform = 'translateX(-50%)';
+    gif.style.width = '15%';
+    gif.style.zIndex = '1';
+
+    document.body.appendChild(gif);
+
     const mensaje = document.createElement('div');
-    mensaje.textContent = '¡Feliz Cumple Panchis :3!';
     mensaje.style.position = 'fixed';
-    mensaje.style.top = '50%';
+    mensaje.style.top = '60%';
     mensaje.style.left = '50%';
     mensaje.style.transform = 'translate(-50%, -50%)';
-    mensaje.style.color = 'white';
-    mensaje.style.fontSize = '30px';
-    mensaje.style.fontWeight = 'bold';
-    mensaje.style.zIndex = '1001'; // Mayor que el video
+    mensaje.style.zIndex = '1001';
+    mensaje.style.display = 'flex';
+    mensaje.style.justifyContent = 'center';
+
+    const texto = '¡Feliz Cumple Panchis :3!';
+    for (let i = 0; i < texto.length; i++) {
+        const letra = document.createElement('span');
+        letra.textContent = texto[i];
+        letra.style.animation = `colorCycle 2s linear infinite ${i * 0.1}s, bounce 1s ease-in-out infinite ${i * 0.1}s`;
+        mensaje.appendChild(letra);
+    }
+
     document.body.appendChild(mensaje);
-
-    // Añadir el video
-    const video = document.createElement('video');
-    video.src = 'assets/alalo.mp4'; // Ruta al video
-    video.autoplay = true;
-    video.loop = true;
-    video.muted = true;
-    video.style.position = 'fixed';
-    video.style.top = '50%';
-    video.style.left = '50%';
-    video.style.transform = 'translate(-50%, -50%)';
-    video.style.width = '80%'; // Ajusta según sea necesario
-    video.style.zIndex = '1000'; // Debajo del mensaje pero por encima de otros elementos
-    video.style.mixBlendMode = 'screen'; // Probar con otros modos si es necesario
-    video.style.filter = 'hue-rotate(90deg) brightness(1.2)'; // Ajustes para el verde
-
-    document.body.appendChild(video);
 
     setTimeout(() => {
         document.body.removeChild(mensaje);
-        document.body.removeChild(video);
+        document.body.removeChild(gif);
     }, 77000);
 });
+
+const estilo = document.createElement('style');
+estilo.textContent = `
+    @keyframes colorCycle {
+        0% { color: red; }
+        16% { color: orange; }
+        33% { color: yellow; }
+        50% { color: green; }
+        66% { color: blue; }
+        83% { color: indigo; }
+        100% { color: violet; }
+    }
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    span {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 0 2px;
+    }
+`;
+document.head.appendChild(estilo);
