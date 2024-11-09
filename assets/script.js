@@ -97,16 +97,16 @@ function crearLucesFestivas() {
 
 document.querySelector('.botonPresioname').addEventListener('click', () => {
     const container = document.querySelector('.botonPresioname').parentElement;
-    
+
     container.style.display = 'none';
     document.body.appendChild(canvasConfeti);
     document.body.appendChild(canvasLuces);
     crearLucesFestivas();
     lanzarConfeti();
     reproducirMusica();
-    
+
     const mensaje = document.createElement('div');
-    mensaje.textContent = '¡Feliz Cumple Panchis :3!';
+    const texto = '¡Feliz Cumple Panchis :3!';
     mensaje.style.position = 'fixed';
     mensaje.style.top = '50%';
     mensaje.style.left = '50%';
@@ -115,10 +115,38 @@ document.querySelector('.botonPresioname').addEventListener('click', () => {
     mensaje.style.fontSize = '30px';
     mensaje.style.fontWeight = 'bold';
     mensaje.style.zIndex = '1000';
-    mensaje.style.whiteSpace = 'nowrap';
+    mensaje.style.display = 'flex';
+    mensaje.style.gap = '3px';
     document.body.appendChild(mensaje);
+
+   
+    for (let i = 0; i < texto.length; i++) {
+        const letra = document.createElement('span');
+        letra.textContent = texto[i];
+        letra.style.animation = `colorCycle 2s linear infinite ${i * 0.1}s, bounce 1s ease-in-out infinite ${i * 0.1}s`;
+        mensaje.appendChild(letra);
+    }
 
     setTimeout(() => {
         document.body.removeChild(mensaje);
     }, 77000);
 });
+
+
+const estilo = document.createElement('style');
+estilo.textContent = `
+    @keyframes colorCycle {
+        0% { color: red; }
+        16% { color: orange; }
+        33% { color: yellow; }
+        50% { color: green; }
+        66% { color: blue; }
+        83% { color: indigo; }
+        100% { color: violet; }
+    }
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+`;
+document.head.appendChild(estilo);
