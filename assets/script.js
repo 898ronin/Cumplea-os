@@ -97,16 +97,18 @@ function crearLucesFestivas() {
 
 document.querySelector('.botonPresioname').addEventListener('click', () => {
     const container = document.querySelector('.botonPresioname').parentElement;
-
     container.style.display = 'none';
+
+    // Añadir canvas y luces
     document.body.appendChild(canvasConfeti);
     document.body.appendChild(canvasLuces);
     crearLucesFestivas();
     lanzarConfeti();
     reproducirMusica();
 
+    // Añadir mensaje de texto
     const mensaje = document.createElement('div');
-    const texto = '¡Feliz Cumple Panchis :3!';
+    mensaje.textContent = '¡Feliz Cumple Panchis :3!';
     mensaje.style.position = 'fixed';
     mensaje.style.top = '50%';
     mensaje.style.left = '50%';
@@ -114,39 +116,28 @@ document.querySelector('.botonPresioname').addEventListener('click', () => {
     mensaje.style.color = 'white';
     mensaje.style.fontSize = '30px';
     mensaje.style.fontWeight = 'bold';
-    mensaje.style.zIndex = '1000';
-    mensaje.style.display = 'flex';
-    mensaje.style.gap = '3px';
+    mensaje.style.zIndex = '1001'; // Mayor que el video
     document.body.appendChild(mensaje);
 
-   
-    for (let i = 0; i < texto.length; i++) {
-        const letra = document.createElement('span');
-        letra.textContent = texto[i];
-        letra.style.animation = `colorCycle 2s linear infinite ${i * 0.1}s, bounce 1s ease-in-out infinite ${i * 0.1}s`;
-        mensaje.appendChild(letra);
-    }
+    // Añadir el video
+    const video = document.createElement('video');
+    video.src = 'assets/alalo.mp4'; // Ruta al video
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    video.style.position = 'fixed';
+    video.style.top = '50%';
+    video.style.left = '50%';
+    video.style.transform = 'translate(-50%, -50%)';
+    video.style.width = '80%'; // Ajusta según sea necesario
+    video.style.zIndex = '1000'; // Debajo del mensaje pero por encima de otros elementos
+    video.style.mixBlendMode = 'screen'; // Probar con otros modos si es necesario
+    video.style.filter = 'hue-rotate(90deg) brightness(1.2)'; // Ajustes para el verde
+
+    document.body.appendChild(video);
 
     setTimeout(() => {
         document.body.removeChild(mensaje);
+        document.body.removeChild(video);
     }, 77000);
 });
-
-
-const estilo = document.createElement('style');
-estilo.textContent = `
-    @keyframes colorCycle {
-        0% { color: red; }
-        16% { color: orange; }
-        33% { color: yellow; }
-        50% { color: green; }
-        66% { color: blue; }
-        83% { color: indigo; }
-        100% { color: violet; }
-    }
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-    }
-`;
-document.head.appendChild(estilo);
