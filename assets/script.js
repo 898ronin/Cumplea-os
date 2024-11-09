@@ -158,6 +158,11 @@ estilo.textContent = `
         font-size: 18px;
         font-weight: bold;
         margin: 0 2px;
+        text-shadow: 
+            1px 1px 0 white, 
+            -1px 1px 0 white, 
+            1px -1px 0 white, 
+            -1px -1px 0 white; /* Contorno blanco */
     }
 `;
 document.head.appendChild(estilo);
