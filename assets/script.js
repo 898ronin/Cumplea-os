@@ -21,7 +21,7 @@ canvasLuces.style.pointerEvents = 'none';
 function lanzarConfeti() {
     const duration = 77000;
     const animationEnd = Date.now() + duration;
-    const defaults = { spread: 60, startVelocity: 30, particleCount: 100, origin: { y: 0.8 } };
+    const defaults = { spread: 60, startVelocity: 30, particleCount: 100, origin: { y: 1 } };
 
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
