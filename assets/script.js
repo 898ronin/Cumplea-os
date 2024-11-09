@@ -155,7 +155,7 @@ estilo.textContent = `
         50% { transform: translateY(-10px); }
     }
     span {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin: 0 2px;
     }
