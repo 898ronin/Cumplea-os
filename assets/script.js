@@ -159,10 +159,14 @@ estilo.textContent = `
         font-weight: bold;
         margin: 0 2px;
         text-shadow: 
-            1px 1px 0 white, 
-            -1px 1px 0 white, 
-            1px -1px 0 white, 
-            -1px -1px 0 white; /* Contorno blanco */
+            0.5px 0.5px 0 white, 
+            -0.5px 0.5px 0 white, 
+            0.5px -0.5px 0 white, 
+            -0.5px -0.5px 0 white, /* Trazo más fino */
+            0 0 10px white,
+            0 0 20px white,
+            0 0 30px white;
     }
 `;
 document.head.appendChild(estilo);
+
