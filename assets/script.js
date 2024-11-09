@@ -109,7 +109,7 @@ document.querySelector('.botonPresioname').addEventListener('click', () => {
     gif.style.top = '10%';
     gif.style.left = '50%';
     gif.style.transform = 'translateX(-50%)';
-    gif.style.width = '15%';
+    gif.style.width = '35%';
     gif.style.zIndex = '1';
 
     document.body.appendChild(gif);
