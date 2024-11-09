@@ -9,12 +9,12 @@ body {
     height: 90vh; 
 }
 
-
 button {
-    --glow-color: rgb(217, 176, 255);
-    --glow-spread-color: rgba(191, 123, 255, 0.781);
-    --enhanced-glow-color: rgb(231, 206, 255);
-    --btn-color: rgb(100, 61, 136);
+    --glow-color: rgb(173, 216, 230);
+    --glow-spread-color: rgba(135, 206, 235, 0.781); 
+    --enhanced-glow-color: rgb(176, 224, 230); 
+    --btn-color: rgb(70, 130, 180); 
+
     border: .25em solid var(--glow-color);
     padding: 1em 3em;
     color: var(--glow-color);
@@ -24,14 +24,15 @@ button {
     border-radius: 1em;
     outline: none;
     box-shadow: 0 0 1em .25em var(--glow-color),
-           0 0 4em 1em var(--glow-spread-color),
-           inset 0 0 .75em .25em var(--glow-color);
+                0 0 4em 1em var(--glow-spread-color),
+                inset 0 0 .75em .25em var(--glow-color);
     text-shadow: 0 0 .5em var(--glow-color);
     position: relative;
     transition: all 0.3s;
-   }
-   
-   button::after {
+    animation: blinkDefect 2s infinite;
+}
+
+button::after {
     pointer-events: none;
     content: "";
     position: absolute;
@@ -43,18 +44,42 @@ button {
     filter: blur(2em);
     opacity: .7;
     transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
-   }
-   
-   button:hover {
+}
+
+button:hover {
     color: var(--btn-color);
     background-color: var(--glow-color);
     box-shadow: 0 0 1em .25em var(--glow-color),
-           0 0 4em 2em var(--glow-spread-color),
-           inset 0 0 .75em .25em var(--glow-color);
-   }
-   
-   button:active {
+                0 0 4em 2em var(--glow-spread-color),
+                inset 0 0 .75em .25em var(--glow-color);
+}
+
+button:active {
     box-shadow: 0 0 0.6em .25em var(--glow-color),
-           0 0 2.5em 2em var(--glow-spread-color),
-           inset 0 0 .5em .25em var(--glow-color);
-   }
+                0 0 2.5em 2em var(--glow-spread-color),
+                inset 0 0 .5em .25em var(--glow-color);
+}
+
+@keyframes blinkDefect {
+    0%, 100% {
+        box-shadow: 0 0 1em .25em var(--glow-color),
+                    0 0 4em 1em var(--glow-spread-color),
+                    inset 0 0 .75em .25em var(--glow-color);
+        opacity: 1;
+    }
+    20%, 40%, 60% {
+        box-shadow: 0 0 0.5em .1em var(--glow-color),
+                    0 0 2em .5em var(--glow-spread-color),
+                    inset 0 0 .5em .1em var(--glow-color);
+        opacity: 0.6;
+    }
+    30%, 50%, 70% {
+        box-shadow: 0 0 1.5em .3em var(--enhanced-glow-color),
+                    0 0 3em 1.5em var(--glow-spread-color),
+                    inset 0 0 1em .3em var(--enhanced-glow-color);
+        opacity: 0.8;
+    }
+    80% {
+        opacity: 0.4;
+    }
+}
